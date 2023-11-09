@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tambah</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <main>
+
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">BERHASIL TAMBAH DATA</h1>
+                <p>
+                <a href="{{url_for('index')}}" class="btn btn-primary btn-lg my-2">ke halaman awal</a>
+              </p>
+            </div>
+          </div>
+        </section>
+        
+    </main>
+    <script>
+        $(document).ready(function () {
+            $('#tambahForm').submit(function (event) {
+                event.preventDefault();
+
+                var nama = $('#nama').val();
+                var hobi = $('#hobi').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/tambah_data",
+                    data: {
+                        nama: nama,
+                        hobi: hobi
+                    },
+                    success: function (response) {
+                        alert(response.message);
+                    },
+                    error: function () {
+                        alert("Gagal menambahkan data. Pastikan data tidak kosong.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

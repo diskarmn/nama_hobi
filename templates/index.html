@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>index</title>
+</head>
+
+<body>
+    <main>
+
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">DISKA</h1>
+                </div>
+            </div>
+        </section>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <form method="POST" action="/tambah_data" class="mb-5" id="dataForm">
+                    <div class="form-groub">
+                        <label for="nama">nama</label>
+                        <input type="text" id="nama" name="nama" required class="form-control">
+                    </div>
+                    <div class="form-groub">
+                        <label for="hobi">hobi</label>
+                        <input type="text" id="hobi" name="hobi" required class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">tambah data</button>
+                </form>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th class="h2">nama</th>
+                        <th class="h2">hobi</th>
+                    </tr>
+                    {% for isi in semua %}
+                    <tr>
+                        <td class="h5">{{isi.nama}}</td>
+                        <td class="h5">{{isi.hobi}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </main>
+    <script>
+        $(document).ready(function () {
+            $('#dataform').submit(function (event) {
+                event.preventDefault();
+                var nama = $('#nama').val();
+                var hobi = $('#hobi').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/tambah_data',
+                    data: {
+                        nama: nama,
+                        hobi: hobi
+                    },
+                    success: function (response) {
+                       
+                        
+                    }
+                })
+            })
+        })
+    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
